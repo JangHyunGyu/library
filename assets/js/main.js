@@ -499,4 +499,13 @@ document.getElementById('book-modal').addEventListener('click', (e) => {
 document.querySelectorAll('.book').forEach(book => {
     const randomRot = (Math.random() - 0.5) * 2; // -1 to 1 degree
     book.style.setProperty('--random-rotate', `${randomRot}deg`);
+    
+    // Set transform origin based on rotation direction to prevent clipping
+    // If rotating clockwise (+), pivot on bottom right to lift left side
+    // If rotating counter-clockwise (-), pivot on bottom left to lift right side
+    if (randomRot > 0) {
+        book.style.setProperty('--transform-origin', 'bottom right');
+    } else {
+        book.style.setProperty('--transform-origin', 'bottom left');
+    }
 });
