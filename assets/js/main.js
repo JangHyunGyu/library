@@ -531,9 +531,18 @@ function changePage(direction) {
     clone.style.fontFamily = style.fontFamily;
     clone.style.fontSize = style.fontSize;
     clone.style.lineHeight = style.lineHeight;
+    clone.style.paddingTop = style.paddingTop;
+    clone.style.paddingBottom = style.paddingBottom;
+    clone.style.paddingLeft = style.paddingLeft;
+    clone.style.paddingRight = style.paddingRight;
+    clone.style.width = style.width;
+    clone.style.height = style.height;
     
     // Append to parent (modal-content) to overlay
     container.parentElement.appendChild(clone);
+    
+    // Force layout to ensure scrollWidth is calculated
+    void clone.offsetHeight;
     
     // Sync scroll position of clone
     clone.scrollLeft = currentScroll;
@@ -555,7 +564,7 @@ function changePage(direction) {
     setTimeout(() => {
         clone.remove();
         isFlipping = false;
-    }, 800); // Match CSS animation duration
+    }, 600); // Match CSS animation duration
 }
 
 function updatePageIndicator() {

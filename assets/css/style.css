@@ -334,12 +334,12 @@ body {
 }
 
 .page-clone.flip-out-left {
-    animation: flipOutLeft 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+    animation: flipOutLeft 0.6s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
     transform-origin: left center;
 }
 
 .page-clone.flip-out-right {
-    animation: flipOutRight 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+    animation: flipOutRight 0.6s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
     transform-origin: right center;
 }
 
