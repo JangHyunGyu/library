@@ -232,7 +232,7 @@ body {
 .close-btn {
     position: absolute;
     top: 1rem;
-    right: 1.5rem;
+    right: 0.5rem;
     font-size: 2rem;
     background: rgba(255, 255, 255, 0.8);
     width: 40px;
