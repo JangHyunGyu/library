@@ -281,7 +281,7 @@ body {
     .shelf {
         flex-wrap: wrap;
         height: auto;
-        padding-bottom: 20px;
+        padding-bottom: 0;
         align-items: flex-end;
     }
     
@@ -290,7 +290,8 @@ body {
         height: 200px !important; /* Force uniform height on mobile */
     }
     
-    .book:hover {
+    .book:hover,
+    .book.is-flipped {
         width: 140px; /* Smaller expansion on mobile */
     }
     
