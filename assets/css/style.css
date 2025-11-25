@@ -332,24 +332,20 @@ body {
 
     .bookshelf-container {
         margin: 0.5rem auto;
+        padding: 0 1rem; /* Reduce padding to give more space */
     }
 
     .shelf {
         flex-wrap: nowrap; /* Prevent wrapping */
-        overflow-x: auto; /* Allow horizontal scroll if needed */
+        /* overflow-x: auto; Removed to prevent accidental scrolling */
         height: 260px; /* Tighter height for mobile */
         padding-bottom: 0;
         margin-bottom: 1.5rem;
         align-items: flex-end;
         justify-content: center;
-        /* Hide scrollbar */
-        -ms-overflow-style: none;
-        scrollbar-width: none;
     }
     
-    .shelf::-webkit-scrollbar {
-        display: none;
-    }
+    /* Removed scrollbar hiding styles since overflow is gone */
     
     .book {
         width: 40px;
