@@ -338,7 +338,7 @@ body {
     .shelf {
         flex-wrap: nowrap; /* Prevent wrapping */
         /* overflow-x: auto; Removed to prevent accidental scrolling */
-        height: 260px; /* Tighter height for mobile */
+        height: 220px; /* Reduced height for smaller books */
         padding-bottom: 0;
         margin-bottom: 1.5rem;
         align-items: flex-end;
@@ -348,20 +348,24 @@ body {
     /* Removed scrollbar hiding styles since overflow is gone */
     
     .book {
-        width: 40px;
-        /* height removed to allow variable heights from PC styles */
+        width: 32px; /* Reduced spine width */
         flex-shrink: 0; /* Prevent books from squishing */
     }
+
+    /* Scale down book heights for mobile */
+    .book:nth-child(1) { height: 190px; }
+    .book:nth-child(2) { height: 170px; }
+    .book:nth-child(3) { height: 200px; }
     
     .book:hover,
     .book.is-flipped {
-        width: 140px; /* Smaller expansion on mobile */
+        width: 120px; /* Reduced cover width */
         transform: translateY(-10px); /* Lift slightly to create space at bottom */
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         z-index: 10;
     }
     
     .book-cover {
-        width: 140px;
+        width: 120px; /* Match flipped width */
     }
 }
