@@ -521,7 +521,7 @@ function changePage(direction) {
     // Create a clone of the current view
     const clone = document.createElement('div');
     clone.className = 'page-clone';
-    clone.innerHTML = container.innerHTML;
+    // clone.innerHTML = container.innerHTML; // Blank page
     
     // Copy computed styles that affect layout
     const style = window.getComputedStyle(container);
@@ -557,8 +557,7 @@ function changePage(direction) {
     // Force layout to ensure scrollWidth is calculated
     void clone.offsetHeight;
     
-    // Sync scroll position of clone
-    clone.scrollLeft = currentScroll;
+    // No need to sync scroll for blank page
     
     // Immediately scroll the real container to the next page
     container.scrollBy({
