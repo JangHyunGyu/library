@@ -463,6 +463,9 @@ function openBook(storyId) {
         // Reset scroll position
         container.scrollLeft = 0;
         
+        // Update layout for columns
+        updateColumnLayout();
+        
         // Wait for layout to stabilize then update indicator
         setTimeout(updatePageIndicator, 100);
     }
@@ -474,22 +477,36 @@ function closeBook() {
     document.body.style.overflow = '';
 }
 
+function updateColumnLayout() {
+    const container = document.getElementById('story-container');
+    if (!container) return;
+    
+    const style = window.getComputedStyle(container);
+    const paddingLeft = parseFloat(style.paddingLeft);
+    const paddingRight = parseFloat(style.paddingRight);
+    // clientWidth includes padding, so subtract it to get content box width
+    const contentWidth = container.clientWidth - paddingLeft - paddingRight;
+    
+    // Set column width to exactly the content width
+    container.style.columnWidth = `${contentWidth}px`;
+    
+    // Store values for navigation
+    const gap = parseFloat(style.columnGap) || 0;
+    container.dataset.columnGap = gap;
+    container.dataset.contentWidth = contentWidth;
+}
+
 // Ebook Navigation Logic
 function changePage(direction) {
     const container = document.getElementById('story-container');
-    const pageWidth = container.clientWidth + 40; // Add gap approximation or just clientWidth?
-    // CSS column gap is 4rem (64px) or 2rem (32px). 
-    // Actually, scrollWidth includes gaps. 
-    // Usually scrolling by clientWidth is enough if gap is handled by browser paging.
-    // But with columns, the scroll snap is not automatic unless we use scroll-snap.
-    // Let's try scrolling by clientWidth + gap.
     
-    // Better approach: Scroll by exactly one clientWidth. 
-    // The browser handles the column flow.
-    const scrollAmount = container.clientWidth + 64; // 4rem gap approx
+    // Use calculated values if available, otherwise fallback
+    const contentWidth = parseFloat(container.dataset.contentWidth) || container.clientWidth;
+    const gap = parseFloat(container.dataset.columnGap) || 0;
+    const scrollAmount = contentWidth + gap;
     
     container.scrollBy({
-        left: direction * container.clientWidth, // Just clientWidth usually works for columns
+        left: direction * scrollAmount,
         behavior: 'smooth'
     });
     
@@ -503,16 +520,13 @@ function updatePageIndicator() {
     const nextBtn = document.getElementById('next-btn');
     const indicator = document.getElementById('page-indicator');
     
-    // Calculate pages
-    // Note: scrollWidth is total width, clientWidth is visible width
-    // With columns, scrollWidth is (num_columns * (col_width + gap)) - gap?
-    // It's safer to use scrollLeft / clientWidth
+    const contentWidth = parseFloat(container.dataset.contentWidth) || container.clientWidth;
+    const gap = parseFloat(container.dataset.columnGap) || 0;
+    const scrollAmount = contentWidth + gap;
     
-    const currentPage = Math.round(container.scrollLeft / container.clientWidth) + 1;
-    const totalPages = Math.ceil(container.scrollWidth / container.clientWidth); // Approximation
-    
-    // Sometimes totalPages calculation is off by 1 due to rounding/gaps.
-    // Let's trust scrollWidth.
+    const currentPage = Math.round(container.scrollLeft / scrollAmount) + 1;
+    // Use scrollWidth to estimate total pages
+    const totalPages = Math.ceil(container.scrollWidth / scrollAmount);
     
     indicator.textContent = `${currentPage} / ${totalPages}`;
     
@@ -537,6 +551,7 @@ document.getElementById('story-container').addEventListener('click', (e) => {
 // Update indicator on resize
 window.addEventListener('resize', () => {
     if (!document.getElementById('book-modal').hidden) {
+        updateColumnLayout();
         updatePageIndicator();
     }
 });

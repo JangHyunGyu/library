@@ -300,7 +300,7 @@ body {
     overflow-x: hidden; /* Controlled by JS */
     height: 100%;
     padding: 3rem 3rem 5rem 3rem; /* Bottom padding for nav */
-    column-width: 100vw; /* Force single column per view */
+    /* column-width set by JS to match container width */
     column-gap: 4rem;
     column-fill: auto;
     flex: 1;
