@@ -311,12 +311,12 @@ body {
 
 /* Page Flip Animations */
 .story-container.flipping-next {
-    animation: flipNext 0.6s ease-in-out forwards;
+    animation: flipNext 0.3s ease-in-out forwards;
     transform-origin: left center;
 }
 
 .story-container.flipping-prev {
-    animation: flipPrev 0.6s ease-in-out forwards;
+    animation: flipPrev 0.3s ease-in-out forwards;
     transform-origin: right center;
 }
 

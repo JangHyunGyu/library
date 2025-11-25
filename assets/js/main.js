@@ -529,13 +529,13 @@ function changePage(direction) {
             behavior: 'auto' // Instant scroll
         });
         updatePageIndicator();
-    }, 300); // Half of 0.6s animation
+    }, 150); // Half of 0.3s animation
     
     // Cleanup after animation
     setTimeout(() => {
         container.classList.remove(animationClass);
         isFlipping = false;
-    }, 600); // Full animation duration
+    }, 300); // Full animation duration
 }
 
 function updatePageIndicator() {
