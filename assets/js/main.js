@@ -518,24 +518,44 @@ function changePage(direction) {
 
     isFlipping = true;
     
-    // Add animation class
-    const animationClass = direction === 1 ? 'flipping-next' : 'flipping-prev';
-    container.classList.add(animationClass);
+    // Create a clone of the current view
+    const clone = document.createElement('div');
+    clone.className = 'page-clone';
+    clone.innerHTML = container.innerHTML;
     
-    // Wait for half animation to scroll (at 90deg invisible point)
-    setTimeout(() => {
-        container.scrollBy({
-            left: direction * scrollAmount,
-            behavior: 'auto' // Instant scroll
-        });
-        updatePageIndicator();
-    }, 150); // Half of 0.3s animation
+    // Copy computed styles that affect layout
+    const style = window.getComputedStyle(container);
+    clone.style.columnWidth = style.columnWidth;
+    clone.style.columnGap = style.columnGap;
+    clone.style.columnFill = style.columnFill;
+    clone.style.fontFamily = style.fontFamily;
+    clone.style.fontSize = style.fontSize;
+    clone.style.lineHeight = style.lineHeight;
+    
+    // Append to parent (modal-content) to overlay
+    container.parentElement.appendChild(clone);
+    
+    // Sync scroll position of clone
+    clone.scrollLeft = currentScroll;
+    
+    // Immediately scroll the real container to the next page
+    container.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'auto'
+    });
+    updatePageIndicator();
+    
+    // Animate the clone flipping away
+    // If Next (1): Flip Left (rotateY -90)
+    // If Prev (-1): Flip Right (rotateY 90)
+    const animationClass = direction === 1 ? 'flip-out-left' : 'flip-out-right';
+    clone.classList.add(animationClass);
     
     // Cleanup after animation
     setTimeout(() => {
-        container.classList.remove(animationClass);
+        clone.remove();
         isFlipping = false;
-    }, 300); // Full animation duration
+    }, 800); // Match CSS animation duration
 }
 
 function updatePageIndicator() {
