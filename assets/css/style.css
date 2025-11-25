@@ -98,6 +98,7 @@ body {
     position: relative;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: rotate(var(--random-rotate, 0deg));
     transform-origin: bottom left;
     box-shadow: -2px 0 5px rgba(0,0,0,0.05);
     border-radius: 2px 4px 4px 2px;
@@ -164,18 +165,21 @@ body {
 }
 
 /* Hover Effect: Pull book out */
-.book:hover {
+.book:hover,
+.book.is-flipped {
     transform: translateY(-10px) translateX(10px);
     width: 180px; /* Expand to show cover */
     box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
     z-index: 10;
 }
 
-.book:hover .book-spine {
+.book:hover .book-spine,
+.book.is-flipped .book-spine {
     opacity: 0; /* Hide spine text */
 }
 
-.book:hover .book-cover {
+.book:hover .book-cover,
+.book.is-flipped .book-cover {
     transform: rotateY(0deg);
     opacity: 1;
 }

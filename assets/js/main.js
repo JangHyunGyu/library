@@ -467,6 +467,27 @@ function closeBook() {
     document.body.style.overflow = '';
 }
 
+// Handle book interaction (Touch vs Click)
+function handleBookClick(element, storyId) {
+    // Check if device supports hover (coarse pointer usually means touch)
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+
+    if (isTouch) {
+        // If already flipped, open the book
+        if (element.classList.contains('is-flipped')) {
+            openBook(storyId);
+        } else {
+            // Close any other open books
+            document.querySelectorAll('.book').forEach(b => b.classList.remove('is-flipped'));
+            // Flip this one
+            element.classList.add('is-flipped');
+        }
+    } else {
+        // Non-touch devices: just open (hover handles the flip)
+        openBook(storyId);
+    }
+}
+
 // Close modal when clicking outside content
 document.getElementById('book-modal').addEventListener('click', (e) => {
     if (e.target.id === 'book-modal') {
@@ -477,5 +498,5 @@ document.getElementById('book-modal').addEventListener('click', (e) => {
 // Add random slight rotation to books for realism
 document.querySelectorAll('.book').forEach(book => {
     const randomRot = (Math.random() - 0.5) * 2; // -1 to 1 degree
-    book.style.transform = `rotate(${randomRot}deg)`;
+    book.style.setProperty('--random-rotate', `${randomRot}deg`);
 });

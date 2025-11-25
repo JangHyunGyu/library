@@ -24,7 +24,7 @@
     <main class="bookshelf-container">
         <!-- Shelf 1 -->
         <div class="shelf">
-            <div class="book" data-color="pastel-blue" onclick="openBook('story_p')">
+            <div class="book" data-color="pastel-blue" onclick="handleBookClick(this, 'story_p')">
                 <div class="book-spine">
                     <span class="book-title">P에 대하여</span>
                 </div>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div class="book" data-color="pastel-pink" onclick="openBook('story2')">
+            <div class="book" data-color="pastel-pink" onclick="handleBookClick(this, 'story2')">
                 <div class="book-spine">
                     <span class="book-title">비 오는 날의 수채화</span>
                 </div>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            <div class="book" data-color="pastel-green" onclick="openBook('story3')">
+            <div class="book" data-color="pastel-green" onclick="handleBookClick(this, 'story3')">
                 <div class="book-spine">
                     <span class="book-title">기억의 조각들</span>
                 </div>
@@ -63,7 +63,7 @@
 
         <!-- Shelf 2 -->
         <div class="shelf">
-            <div class="book" data-color="pastel-yellow" onclick="openBook('story4')">
+            <div class="book" data-color="pastel-yellow" onclick="handleBookClick(this, 'story4')">
                 <div class="book-spine">
                     <span class="book-title">달빛 산책</span>
                 </div>
@@ -74,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            <div class="book" data-color="pastel-beige" onclick="openBook('story5')">
+            <div class="book" data-color="pastel-beige" onclick="handleBookClick(this, 'story5')">
                 <div class="book-spine">
                     <span class="book-title">첫눈이 오면</span>
                 </div>
