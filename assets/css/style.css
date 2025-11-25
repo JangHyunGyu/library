@@ -232,9 +232,7 @@ body {
 }
 
 /* Page Flip Animation Layers */
-.modal:not([hidden]) .modal-content::before,
-.modal:not([hidden]) .modal-content::after {
-    content: '';
+.flip-page {
     position: absolute;
     top: 0;
     left: 0;
@@ -246,19 +244,20 @@ body {
     pointer-events: none;
     border-right: 1px solid rgba(0,0,0,0.05);
     backface-visibility: hidden;
-}
-
-/* Top Page (Fastest) */
-.modal:not([hidden]) .modal-content::after {
-    animation: pageFlip 0.5s cubic-bezier(0.2, 0.1, 0.25, 1) forwards;
+    opacity: 0;
     background: linear-gradient(to right, #fff 95%, #f0f0f0 100%);
 }
 
-/* Middle Page (Slower) */
-.modal:not([hidden]) .modal-content::before {
-    animation: pageFlip 0.7s cubic-bezier(0.2, 0.1, 0.25, 1) forwards;
-    background: linear-gradient(to right, #fdfdfd 95%, #eee 100%);
+.modal:not([hidden]) .flip-page {
+    opacity: 1;
 }
+
+/* Staggered animations for 5 pages */
+.modal:not([hidden]) .flip-page:nth-child(1) { animation: pageFlip 0.4s cubic-bezier(0.2, 0.1, 0.25, 1) forwards; z-index: 25; }
+.modal:not([hidden]) .flip-page:nth-child(2) { animation: pageFlip 0.5s cubic-bezier(0.2, 0.1, 0.25, 1) forwards; z-index: 24; }
+.modal:not([hidden]) .flip-page:nth-child(3) { animation: pageFlip 0.6s cubic-bezier(0.2, 0.1, 0.25, 1) forwards; z-index: 23; }
+.modal:not([hidden]) .flip-page:nth-child(4) { animation: pageFlip 0.7s cubic-bezier(0.2, 0.1, 0.25, 1) forwards; z-index: 22; }
+.modal:not([hidden]) .flip-page:nth-child(5) { animation: pageFlip 0.8s cubic-bezier(0.2, 0.1, 0.25, 1) forwards; z-index: 21; }
 
 @keyframes pageFlip {
     0% {
