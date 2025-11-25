@@ -548,9 +548,17 @@ function updatePageIndicator() {
     const gap = parseFloat(container.dataset.columnGap) || 0;
     const scrollAmount = contentWidth + gap;
     
+    // Get padding to correct scrollWidth calculation
+    const style = window.getComputedStyle(container);
+    const paddingLeft = parseFloat(style.paddingLeft);
+    const paddingRight = parseFloat(style.paddingRight);
+    
+    // scrollWidth includes padding, so we subtract it to get the width of the paginated content
+    // We use a small tolerance (1px) to handle sub-pixel rendering issues
+    const totalScrollableWidth = container.scrollWidth - paddingLeft - paddingRight;
+    
     const currentPage = Math.round(container.scrollLeft / scrollAmount) + 1;
-    // Use scrollWidth to estimate total pages
-    const totalPages = Math.ceil(container.scrollWidth / scrollAmount);
+    const totalPages = Math.max(1, Math.ceil((totalScrollableWidth + 1) / scrollAmount));
     
     indicator.textContent = `${currentPage} / ${totalPages}`;
     
