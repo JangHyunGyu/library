@@ -496,8 +496,12 @@ function updateColumnLayout() {
     container.dataset.contentWidth = contentWidth;
 }
 
+let isFlipping = false;
+
 // Ebook Navigation Logic
 function changePage(direction) {
+    if (isFlipping) return; // Prevent rapid clicks causing clipping
+
     const container = document.getElementById('story-container');
     
     // Use calculated values if available, otherwise fallback
@@ -505,13 +509,33 @@ function changePage(direction) {
     const gap = parseFloat(container.dataset.columnGap) || 0;
     const scrollAmount = contentWidth + gap;
     
-    container.scrollBy({
-        left: direction * scrollAmount,
-        behavior: 'smooth'
-    });
+    // Check boundaries
+    const currentScroll = container.scrollLeft;
+    const maxScroll = container.scrollWidth - container.clientWidth; // Approx
     
-    // Update indicator after scroll
-    setTimeout(updatePageIndicator, 500);
+    if (direction === 1 && currentScroll >= maxScroll - 10) return; // End of book
+    if (direction === -1 && currentScroll <= 10) return; // Start of book
+
+    isFlipping = true;
+    
+    // Add animation class
+    const animationClass = direction === 1 ? 'flipping-next' : 'flipping-prev';
+    container.classList.add(animationClass);
+    
+    // Wait for half animation to scroll (at 90deg invisible point)
+    setTimeout(() => {
+        container.scrollBy({
+            left: direction * scrollAmount,
+            behavior: 'auto' // Instant scroll
+        });
+        updatePageIndicator();
+    }, 300); // Half of 0.6s animation
+    
+    // Cleanup after animation
+    setTimeout(() => {
+        container.classList.remove(animationClass);
+        isFlipping = false;
+    }, 600); // Full animation duration
 }
 
 function updatePageIndicator() {
