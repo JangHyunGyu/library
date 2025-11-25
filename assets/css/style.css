@@ -281,7 +281,7 @@ body {
     .shelf {
         flex-wrap: nowrap; /* Prevent wrapping */
         overflow-x: auto; /* Allow horizontal scroll if needed */
-        height: 240px; /* Fixed height to prevent layout shifts */
+        height: 280px; /* Increased height to fit variable book sizes */
         padding-bottom: 0;
         align-items: flex-end;
         justify-content: center;
@@ -296,7 +296,7 @@ body {
     
     .book {
         width: 40px;
-        height: 200px !important; /* Force uniform height on mobile */
+        /* height removed to allow variable heights from PC styles */
         flex-shrink: 0; /* Prevent books from squishing */
     }
     
