@@ -279,20 +279,32 @@ body {
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .shelf {
-        flex-wrap: wrap;
-        height: auto;
+        flex-wrap: nowrap; /* Prevent wrapping */
+        overflow-x: auto; /* Allow horizontal scroll if needed */
+        height: 240px; /* Fixed height to prevent layout shifts */
         padding-bottom: 0;
         align-items: flex-end;
+        justify-content: center;
+        /* Hide scrollbar */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    
+    .shelf::-webkit-scrollbar {
+        display: none;
     }
     
     .book {
         width: 40px;
         height: 200px !important; /* Force uniform height on mobile */
+        flex-shrink: 0; /* Prevent books from squishing */
     }
     
     .book:hover,
     .book.is-flipped {
         width: 140px; /* Smaller expansion on mobile */
+        transform: none; /* Remove lift effect to keep layout stable */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
     
     .book-cover {
