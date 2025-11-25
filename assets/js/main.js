@@ -451,6 +451,7 @@ function openBook(storyId) {
     const modal = document.getElementById('book-modal');
     const title = document.getElementById('modal-title');
     const body = document.getElementById('modal-body');
+    const container = document.getElementById('story-container');
     const story = stories[storyId];
 
     if (story) {
@@ -458,6 +459,12 @@ function openBook(storyId) {
         body.innerHTML = story.content;
         modal.hidden = false;
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        
+        // Reset scroll position
+        container.scrollLeft = 0;
+        
+        // Wait for layout to stabilize then update indicator
+        setTimeout(updatePageIndicator, 100);
     }
 }
 
@@ -466,6 +473,73 @@ function closeBook() {
     modal.hidden = true;
     document.body.style.overflow = '';
 }
+
+// Ebook Navigation Logic
+function changePage(direction) {
+    const container = document.getElementById('story-container');
+    const pageWidth = container.clientWidth + 40; // Add gap approximation or just clientWidth?
+    // CSS column gap is 4rem (64px) or 2rem (32px). 
+    // Actually, scrollWidth includes gaps. 
+    // Usually scrolling by clientWidth is enough if gap is handled by browser paging.
+    // But with columns, the scroll snap is not automatic unless we use scroll-snap.
+    // Let's try scrolling by clientWidth + gap.
+    
+    // Better approach: Scroll by exactly one clientWidth. 
+    // The browser handles the column flow.
+    const scrollAmount = container.clientWidth + 64; // 4rem gap approx
+    
+    container.scrollBy({
+        left: direction * container.clientWidth, // Just clientWidth usually works for columns
+        behavior: 'smooth'
+    });
+    
+    // Update indicator after scroll
+    setTimeout(updatePageIndicator, 500);
+}
+
+function updatePageIndicator() {
+    const container = document.getElementById('story-container');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const indicator = document.getElementById('page-indicator');
+    
+    // Calculate pages
+    // Note: scrollWidth is total width, clientWidth is visible width
+    // With columns, scrollWidth is (num_columns * (col_width + gap)) - gap?
+    // It's safer to use scrollLeft / clientWidth
+    
+    const currentPage = Math.round(container.scrollLeft / container.clientWidth) + 1;
+    const totalPages = Math.ceil(container.scrollWidth / container.clientWidth); // Approximation
+    
+    // Sometimes totalPages calculation is off by 1 due to rounding/gaps.
+    // Let's trust scrollWidth.
+    
+    indicator.textContent = `${currentPage} / ${totalPages}`;
+    
+    prevBtn.disabled = currentPage <= 1;
+    nextBtn.disabled = currentPage >= totalPages;
+}
+
+// Handle click on container to flip pages
+document.getElementById('story-container').addEventListener('click', (e) => {
+    const container = e.currentTarget;
+    const clickX = e.clientX - container.getBoundingClientRect().left;
+    const width = container.clientWidth;
+    
+    // If clicked on left 30%, go prev. Right 30%, go next. Center? Maybe nothing or next.
+    if (clickX < width * 0.3) {
+        changePage(-1);
+    } else if (clickX > width * 0.7) {
+        changePage(1);
+    }
+});
+
+// Update indicator on resize
+window.addEventListener('resize', () => {
+    if (!document.getElementById('book-modal').hidden) {
+        updatePageIndicator();
+    }
+});
 
 // Handle book interaction (Touch vs Click)
 function handleBookClick(element, storyId) {

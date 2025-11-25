@@ -105,12 +105,21 @@
             <div class="flip-page"></div>
             <div class="flip-page"></div>
             <div class="flip-page"></div>
+            
             <button class="close-btn" onclick="closeBook()">&times;</button>
-            <div class="story-container">
+            
+            <div class="story-container" id="story-container">
                 <h2 id="modal-title">제목</h2>
                 <div id="modal-body" class="story-text">
                     <!-- Story content goes here -->
                 </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="book-nav">
+                <button id="prev-btn" class="nav-btn" onclick="changePage(-1)">&#10094;</button>
+                <span id="page-indicator">1 / 1</span>
+                <button id="next-btn" class="nav-btn" onclick="changePage(1)">&#10095;</button>
             </div>
         </div>
     </div>
