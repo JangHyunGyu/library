@@ -1,0 +1,282 @@
+:root {
+    --bg-color: #F9F7F2; /* Warm off-white */
+    --shelf-color: #EFEBE0; /* Light wood/stone tone */
+    --text-color: #4A4A4A;
+    --accent-color: #8E8070;
+    --sunlight: rgba(255, 253, 240, 0.6);
+    
+    /* Pastel Book Colors */
+    --book-blue: #D4E0E8;
+    --book-pink: #F2D4D7;
+    --book-green: #D9E4D6;
+    --book-yellow: #F9EBC8;
+    --book-beige: #E8E0D5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Noto Sans KR', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Sunlight Effect */
+.sunlight-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 40%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Header */
+.library-header {
+    text-align: center;
+    padding: 4rem 1rem 2rem;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.library-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.library-subtitle {
+    font-family: 'Gowun Batang', serif;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+
+/* Bookshelf */
+.bookshelf-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.shelf {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 1.5rem;
+    border-bottom: 12px solid var(--shelf-color);
+    padding-bottom: 0;
+    margin-bottom: 4rem;
+    position: relative;
+    height: 320px; /* Fixed height for consistent look */
+}
+
+/* Shadow under shelf */
+.shelf::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 2%;
+    width: 96%;
+    height: 10px;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 70%);
+}
+
+/* Books */
+.book {
+    width: 50px; /* Spine width */
+    height: 240px;
+    background-color: #fff;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: bottom left;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.05);
+    border-radius: 2px 4px 4px 2px;
+}
+
+/* Randomize heights slightly for realism */
+.book:nth-child(1) { height: 250px; }
+.book:nth-child(2) { height: 230px; }
+.book:nth-child(3) { height: 260px; }
+
+/* Book Colors */
+.book[data-color="pastel-blue"] { background-color: var(--book-blue); }
+.book[data-color="pastel-pink"] { background-color: var(--book-pink); }
+.book[data-color="pastel-green"] { background-color: var(--book-green); }
+.book[data-color="pastel-yellow"] { background-color: var(--book-yellow); }
+.book[data-color="pastel-beige"] { background-color: var(--book-beige); }
+
+/* Spine Text */
+.book-spine {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    padding: 10px 0;
+    color: rgba(0,0,0,0.6);
+    font-family: 'Gowun Batang', serif;
+    font-size: 0.9rem;
+    transition: opacity 0.3s;
+}
+
+.book-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 180px; /* Cover width */
+    height: 100%;
+    background-color: inherit;
+    transform: rotateY(-90deg);
+    transform-origin: left;
+    transition: all 0.5s ease;
+    border-radius: 0 4px 4px 0;
+    box-shadow: inset 3px 0 10px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none; /* Let clicks pass through to container */
+}
+
+.cover-content h3 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: rgba(0,0,0,0.7);
+}
+
+.cover-content .author {
+    font-size: 0.8rem;
+    color: rgba(0,0,0,0.5);
+}
+
+/* Hover Effect: Pull book out */
+.book:hover {
+    transform: translateY(-10px) translateX(10px);
+    width: 180px; /* Expand to show cover */
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.book:hover .book-spine {
+    opacity: 0; /* Hide spine text */
+}
+
+.book:hover .book-cover {
+    transform: rotateY(0deg);
+    opacity: 1;
+}
+
+/* Decor Items */
+.decor-plant {
+    width: 60px;
+    height: 100px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 100 L50 60 Q30 30 10 50 Q30 70 50 60 Q70 30 90 50 Q70 70 50 60" fill="%238E8070" opacity="0.3"/></svg>') no-repeat bottom center;
+    background-size: contain;
+    margin-left: auto; /* Push to right */
+}
+
+/* Modal (Reading View) */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(249, 247, 242, 0.95);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal:not([hidden]) {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: #fff;
+    width: 90%;
+    max-width: 700px;
+    height: 85vh;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid #eee;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.story-container {
+    font-family: 'Gowun Batang', serif;
+    line-height: 1.8;
+}
+
+#modal-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.story-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    color: #333;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .shelf {
+        flex-wrap: wrap;
+        height: auto;
+        padding-bottom: 20px;
+        align-items: flex-end;
+    }
+    
+    .book {
+        width: 40px;
+        height: 200px !important; /* Force uniform height on mobile */
+    }
+    
+    .book:hover {
+        width: 140px; /* Smaller expansion on mobile */
+    }
+    
+    .book-cover {
+        width: 140px;
+    }
+}
