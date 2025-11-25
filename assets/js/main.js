@@ -525,18 +525,31 @@ function changePage(direction) {
     
     // Copy computed styles that affect layout
     const style = window.getComputedStyle(container);
-    clone.style.columnWidth = style.columnWidth;
-    clone.style.columnGap = style.columnGap;
-    clone.style.columnFill = style.columnFill;
-    clone.style.fontFamily = style.fontFamily;
-    clone.style.fontSize = style.fontSize;
-    clone.style.lineHeight = style.lineHeight;
+    
+    // Explicitly copy dimensions and layout properties for exact match
+    clone.style.width = `${container.offsetWidth}px`;
+    clone.style.height = `${container.offsetHeight}px`;
     clone.style.paddingTop = style.paddingTop;
     clone.style.paddingBottom = style.paddingBottom;
     clone.style.paddingLeft = style.paddingLeft;
     clone.style.paddingRight = style.paddingRight;
-    clone.style.width = style.width;
-    clone.style.height = style.height;
+    clone.style.columnWidth = style.columnWidth;
+    clone.style.columnGap = style.columnGap;
+    clone.style.columnFill = style.columnFill;
+    clone.style.columnRule = style.columnRule;
+    
+    clone.style.fontFamily = style.fontFamily;
+    clone.style.fontSize = style.fontSize;
+    clone.style.lineHeight = style.lineHeight;
+    clone.style.textAlign = style.textAlign;
+    clone.style.color = style.color;
+    clone.style.boxSizing = 'border-box';
+    
+    // Position exactly over the container
+    clone.style.position = 'absolute';
+    clone.style.left = `${container.offsetLeft}px`;
+    clone.style.top = `${container.offsetTop}px`;
+    clone.style.margin = style.margin;
     
     // Append to parent (modal-content) to overlay
     container.parentElement.appendChild(clone);
