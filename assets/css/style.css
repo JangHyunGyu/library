@@ -356,8 +356,9 @@ body {
     .book:hover,
     .book.is-flipped {
         width: 140px; /* Smaller expansion on mobile */
-        transform: none; /* Remove lift effect to keep layout stable */
+        transform: translateY(-10px); /* Lift slightly to create space at bottom */
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        z-index: 10;
     }
     
     .book-cover {
