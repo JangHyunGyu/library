@@ -42,13 +42,13 @@ body {
 /* Header */
 .library-header {
     text-align: center;
-    padding: 4rem 1rem 2rem;
+    padding: 2rem 1rem 1rem;
     animation: fadeIn 1.5s ease-out;
 }
 
 .library-title {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: var(--text-color);
     margin-bottom: 0.5rem;
     letter-spacing: 1px;
@@ -57,13 +57,13 @@ body {
 .library-subtitle {
     font-family: 'Gowun Batang', serif;
     color: var(--accent-color);
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 /* Bookshelf */
 .bookshelf-container {
     max-width: 1000px;
-    margin: 2rem auto;
+    margin: 1rem auto;
     padding: 0 2rem;
 }
 
@@ -74,9 +74,9 @@ body {
     gap: 1.5rem;
     border-bottom: 12px solid var(--shelf-color);
     padding-bottom: 0;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     position: relative;
-    height: 320px; /* Fixed height for consistent look */
+    height: 280px; /* Fixed height for consistent look */
 }
 
 /* Shadow under shelf */
