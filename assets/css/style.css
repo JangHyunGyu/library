@@ -322,11 +322,24 @@ body {
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
+    .library-header {
+        padding: 1.5rem 1rem 0.5rem;
+    }
+
+    .library-title {
+        font-size: 2rem;
+    }
+
+    .bookshelf-container {
+        margin: 0.5rem auto;
+    }
+
     .shelf {
         flex-wrap: nowrap; /* Prevent wrapping */
         overflow-x: auto; /* Allow horizontal scroll if needed */
-        height: 280px; /* Increased height to fit variable book sizes */
+        height: 260px; /* Tighter height for mobile */
         padding-bottom: 0;
+        margin-bottom: 1.5rem;
         align-items: flex-end;
         justify-content: center;
         /* Hide scrollbar */
