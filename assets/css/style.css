@@ -50,15 +50,43 @@ body {
 }
 
 .home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(142, 128, 112, 0.2);
+    border-radius: 50px;
+    color: var(--accent-color);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
     text-decoration: none;
-    color: #666;
-    font-family: 'Gowun Batang', serif;
-    font-size: 0.9rem;
-    transition: color 0.3s;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 20px rgba(142, 128, 112, 0.08);
+}
+
+.home-link::before {
+    content: '←';
+    font-family: system-ui, -apple-system, sans-serif;
+    font-style: normal;
+    font-size: 0.9em;
+    transition: transform 0.3s ease;
+    opacity: 0.7;
 }
 
 .home-link:hover {
-    color: #333;
+    background: #fff;
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(142, 128, 112, 0.15);
+}
+
+.home-link:hover::before {
+    transform: translateX(-4px);
+    opacity: 1;
 }
 
 /* Header */
