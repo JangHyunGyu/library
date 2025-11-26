@@ -671,3 +671,5 @@ document.querySelectorAll('.book').forEach(book => {
         book.style.setProperty('--transform-origin', 'bottom left');
     }
 });
+
+
