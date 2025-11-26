@@ -1,131 +1,100 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Open Graph / KakaoTalk Share -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://janghyungyu.github.io/library/">
-    <meta property="og:title" content="Myoseon's Stories">
-    <meta property="og:description" content="따뜻한 햇살이 머무는 곳, 당신의 이야기를 담았습니다.">
-    <meta property="og:image" content="https://janghyungyu.github.io/library/assets/images/Myoseonstories.png">
-
-    <title>Myoseon's Stories</title>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-
-<body>
-    <div class="sunlight-overlay"></div>
-
-    <header class="library-header">
-        <h1 class="library-title">Myoseon's Stories</h1>
-        <p class="library-subtitle">따뜻한 햇살이 머무는 곳, <br>당신의 이야기를 담았습니다.</p>
-    </header>
-
-    <main class="bookshelf-container">
-        <!-- Shelf 1 -->
-        <div class="shelf">
-            <div class="book" data-color="pastel-blue" onclick="handleBookClick(this, 'story_p')">
-                <div class="book-spine">
-                    <span class="book-title">P에 대하여</span>
-                </div>
-                <div class="book-cover">
-                    <div class="cover-content">
-                        <h3>P에<br>대하여</h3>
-                        <p class="author">단편소설</p>
-                    </div>
-                </div>
-            </div>
-            <div class="book" data-color="pastel-pink" onclick="handleBookClick(this, 'story2')">
-                <div class="book-spine">
-                    <span class="book-title">비 오는 날의 수채화</span>
-                </div>
-                <div class="book-cover">
-                    <div class="cover-content">
-                        <h3>비 오는 날의<br>수채화</h3>
-                        <p class="author">단편소설</p>
-                    </div>
-                </div>
-            </div>
-            <div class="book" data-color="pastel-green" onclick="handleBookClick(this, 'story3')">
-                <div class="book-spine">
-                    <span class="book-title">기억의 조각들</span>
-                </div>
-                <div class="book-cover">
-                    <div class="cover-content">
-                        <h3>기억의<br>조각들</h3>
-                        <p class="author">에세이</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="decor-plant"></div>
+href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+rel="stylesheet">
+<div class="book-spine">
+    <span class="book-title">P에 대하여</span>
+</div>
+<div class="book-cover">
+    <div class="cover-content">
+        <h3>P에<br>대하여</h3>
+        <p class="author">단편소설</p>
+    </div>
+</div>
+</div>
+<div class="book" data-color="pastel-pink" onclick="handleBookClick(this, 'story2')">
+    <div class="book-spine">
+        <span class="book-title">비 오는 날의 수채화</span>
+    </div>
+    <div class="book-cover">
+        <div class="cover-content">
+            <h3>비 오는 날의<br>수채화</h3>
+            <p class="author">단편소설</p>
         </div>
-
-        <!-- Shelf 2 -->
-        <div class="shelf">
-            <div class="book" data-color="pastel-yellow" onclick="handleBookClick(this, 'story4')">
-                <div class="book-spine">
-                    <span class="book-title">달빛 산책</span>
-                </div>
-                <div class="book-cover">
-                    <div class="cover-content">
-                        <h3>달빛<br>산책</h3>
-                        <p class="author">단편소설</p>
-                    </div>
-                </div>
-            </div>
-            <div class="book" data-color="pastel-beige" onclick="handleBookClick(this, 'story5')">
-                <div class="book-spine">
-                    <span class="book-title">첫눈이 오면</span>
-                </div>
-                <div class="book-cover">
-                    <div class="cover-content">
-                        <h3>첫눈이<br>오면</h3>
-                        <p class="author">로맨스</p>
-                    </div>
-                </div>
-            </div>
-            <div class="decor-frame"></div>
+    </div>
+</div>
+<div class="book" data-color="pastel-green" onclick="handleBookClick(this, 'story3')">
+    <div class="book-spine">
+        <span class="book-title">기억의 조각들</span>
+    </div>
+    <div class="book-cover">
+        <div class="cover-content">
+            <h3>기억의<br>조각들</h3>
+            <p class="author">에세이</p>
         </div>
-    </main>
+    </div>
+</div>
 
-    <div id="book-modal" class="modal" hidden>
-        <div class="modal-content">
-            <!-- Animation Pages -->
-            <div class="flip-page"></div>
-            <div class="flip-page"></div>
-            <div class="flip-page"></div>
-            <div class="flip-page"></div>
-            <div class="flip-page"></div>
+<div class="decor-plant"></div>
+</div>
 
-            <button class="close-btn" onclick="closeBook()">&times;</button>
-
-            <div class="story-container" id="story-container">
-                <h2 id="modal-title">제목</h2>
-                <div id="modal-body" class="story-text">
-                    <!-- Story content goes here -->
-                </div>
-            </div>
-
-            <!-- Navigation Controls -->
-            <div class="book-nav">
-                <button id="prev-btn" class="nav-btn" onclick="changePage(-1)">&#10094;</button>
-                <span id="page-indicator">1 / 1</span>
-                <button id="next-btn" class="nav-btn" onclick="changePage(1)">&#10095;</button>
+<!-- Shelf 2 -->
+<div class="shelf">
+    <div class="book" data-color="pastel-yellow" onclick="handleBookClick(this, 'story4')">
+        <div class="book-spine">
+            <span class="book-title">달빛 산책</span>
+        </div>
+        <div class="book-cover">
+            <div class="cover-content">
+                <h3>달빛<br>산책</h3>
+                <p class="author">단편소설</p>
             </div>
         </div>
     </div>
+    <div class="book" data-color="pastel-beige" onclick="handleBookClick(this, 'story5')">
+        <div class="book-spine">
+            <span class="book-title">첫눈이 오면</span>
+        </div>
+        <div class="book-cover">
+            <div class="cover-content">
+                <h3>첫눈이<br>오면</h3>
+                <p class="author">로맨스</p>
+            </div>
+        </div>
+    </div>
+    <div class="decor-frame"></div>
+</div>
+</main>
 
-    <script src="assets/js/main.js"></script>
+<div id="book-modal" class="modal" hidden>
+    <div class="modal-content">
+        <!-- Animation Pages -->
+        <div class="flip-page"></div>
+        <div class="flip-page"></div>
+        <div class="flip-page"></div>
+        <div class="flip-page"></div>
+        <div class="flip-page"></div>
+
+        <button class="close-btn" onclick="closeBook()">&times;</button>
+
+        <div class="story-container" id="story-container">
+            <h2 id="modal-title">제목</h2>
+            <div id="modal-body" class="story-text">
+                <!-- Story content goes here -->
+            </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="book-nav">
+            <button id="prev-btn" class="nav-btn" onclick="changePage(-1)">&#10094;</button>
+            <span id="page-indicator">1 / 1</span>
+            <button id="next-btn" class="nav-btn" onclick="changePage(1)">&#10095;</button>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/main.js"></script>
 </body>
 
 </html>
