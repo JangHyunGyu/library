@@ -534,8 +534,16 @@ body {
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
+    .top-nav {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-bottom: 0.5rem;
+        text-align: left;
+    }
+
     .library-header {
-        padding: 0.5rem 1rem 0.5rem;
+        padding: 1rem 1rem 0.5rem;
     }
 
     .library-title {
