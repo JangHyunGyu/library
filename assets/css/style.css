@@ -499,6 +499,10 @@ body {
     break-after: avoid;
 }
 
+.story-part + .story-part {
+    break-before: column;
+}
+
 .story-text p {
     margin-bottom: 1.5rem;
     font-size: 1.05rem;
