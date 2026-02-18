@@ -70,20 +70,6 @@
     --paper-border-right: rgba(255, 255, 255, 0.05);
 }
 
-/* Skin: Sepia */
-[data-paper-skin="sepia"] {
-    --paper-base: #F0E0C0;
-    --paper-edge: #D8C8A8;
-    --paper-stain: rgba(160, 120, 60, 0.08);
-    --paper-dark-spot: rgba(140, 100, 40, 0.06);
-    --paper-text: #42362A;
-    --paper-text-sub: #5A4A38;
-    --paper-spine-shadow: rgba(100, 80, 50, 0.1);
-    --paper-indicator: #8A7A60;
-    --paper-close-bg: rgba(240, 224, 192, 0.9);
-    --paper-border-right: rgba(140, 120, 80, 0.15);
-}
-
 /* Skin: Blue Night */
 [data-paper-skin="night"] {
     --paper-base: #1A2332;
@@ -115,12 +101,12 @@
 /* Parchment skin: leather-like edges & texture */
 [data-paper-skin="parchment"] .modal-content {
     border: none;
-    border-radius: 3px;
+    /* Irregular organic shape — asymmetric rounded corners like real animal hide */
+    border-radius: 40% 30% 45% 25% / 8% 12% 10% 15%;
     box-shadow:
         0 10px 30px rgba(60, 40, 15, 0.25),
         inset 0 0 60px rgba(120, 80, 30, 0.12),
         inset 0 0 120px rgba(100, 70, 20, 0.06);
-    /* Irregular torn-edge effect via clip-path */
     /* Outer glow simulating worn leather border */
     outline: 3px solid rgba(160, 120, 60, 0.25);
     outline-offset: -1px;
@@ -128,6 +114,7 @@
 
 /* Parchment: override texture overlay with leather grain */
 [data-paper-skin="parchment"] .modal-content::before {
+    border-radius: inherit;
     background:
         /* Leather grain noise pattern */
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
@@ -146,6 +133,7 @@
 /* Parchment: thicker spine shadow with leather look */
 [data-paper-skin="parchment"] .modal-content::after {
     width: 28px;
+    border-radius: inherit;
     background: linear-gradient(to right,
         rgba(70, 45, 15, 0.2) 0%,
         rgba(90, 60, 20, 0.08) 50%,
@@ -163,6 +151,7 @@
 
 /* Parchment: flip pages look like hide */
 [data-paper-skin="parchment"] .flip-page {
+    border-radius: inherit;
     background:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"),
         linear-gradient(to right, #E8D5B7 90%, #D4BE9A 100%) !important;
