@@ -13,6 +13,12 @@
     --book-green: #D9E4D6;
     --book-yellow: #F9EBC8;
     --book-beige: #E8E0D5;
+
+    /* Aged Paper Colors */
+    --paper-base: #F5ECD7;
+    --paper-edge: #E8DCC8;
+    --paper-stain: rgba(180, 155, 120, 0.06);
+    --paper-dark-spot: rgba(160, 130, 90, 0.04);
 }
 
 * {
@@ -277,19 +283,63 @@ body {
 }
 
 .modal-content {
-    background-color: #fff;
+    background-color: var(--paper-base);
     width: 90%;
     max-width: 700px;
     height: 85vh;
-    /* padding: 3rem; Moved to story-container */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08),
+        inset 0 0 80px rgba(180, 155, 120, 0.08);
     overflow: hidden;
     position: relative;
-    border: 1px solid #eee;
+    border: 1px solid var(--paper-edge);
     display: flex;
     flex-direction: column;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
+}
+
+/* Aged paper texture overlay using layered gradients */
+.modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    background:
+        /* Subtle coffee stain in top-right */
+        radial-gradient(ellipse at 85% 15%, var(--paper-stain) 0%, transparent 50%),
+        /* Slight darkening at edges (foxing) */
+        radial-gradient(ellipse at 10% 90%, var(--paper-dark-spot) 0%, transparent 40%),
+        /* Warm vignette around edges */
+        radial-gradient(ellipse at center, transparent 50%, rgba(180, 155, 120, 0.05) 100%),
+        /* Vertical fiber lines */
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 3px,
+            rgba(160, 140, 110, 0.015) 3px,
+            rgba(160, 140, 110, 0.015) 4px
+        );
+}
+
+/* Darkened left edge simulating book spine shadow */
+.modal-content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(to right,
+        rgba(120, 100, 70, 0.08) 0%,
+        rgba(120, 100, 70, 0.03) 40%,
+        transparent 100%);
 }
 
 /* Page Flip Animation Layers */
@@ -299,14 +349,18 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color: var(--paper-base);
     transform-origin: left center;
     z-index: 20;
     pointer-events: none;
-    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    border-right: 1px solid rgba(160, 140, 110, 0.15);
     backface-visibility: hidden;
     opacity: 0;
-    background: linear-gradient(to right, #fff 95%, #f0f0f0 100%);
+    background:
+        /* Page edge darkening */
+        linear-gradient(to right, var(--paper-base) 92%, var(--paper-edge) 100%),
+        /* Subtle aging spots */
+        radial-gradient(ellipse at 30% 60%, var(--paper-stain) 0%, transparent 50%);
 }
 
 .modal:not([hidden]) .flip-page {
@@ -360,7 +414,7 @@ body {
     top: 1rem;
     right: 0.5rem;
     font-size: 2rem;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(245, 236, 215, 0.85);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -388,10 +442,11 @@ body {
     column-gap: 4rem;
     column-fill: auto;
     flex: 1;
-    /* scroll-behavior: smooth; Removed for JS-controlled flip animation */
     /* Force GPU compositing on iOS without backface-visibility: hidden which causes content disappearing bug */
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
+    /* Aged paper background */
+    background-color: var(--paper-base);
 }
 
 /* Page Flip Animations */
@@ -401,7 +456,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color: var(--paper-base);
     /* Ensure background is opaque */
     z-index: 10;
     pointer-events: none;
@@ -489,14 +544,14 @@ body {
 #page-indicator {
     font-family: 'Gowun Batang', serif;
     font-size: 0.9rem;
-    color: #888;
+    color: #9E8E78;
 }
 
 #modal-title {
     font-size: 2rem;
     margin-bottom: 2rem;
     text-align: center;
-    color: var(--text-color);
+    color: #3D3429;
     /* Ensure title stays on first page */
     break-after: avoid;
 }
@@ -508,8 +563,13 @@ body {
 .story-text p {
     margin-bottom: 1.5rem;
     font-size: 1.05rem;
-    color: #333;
+    color: #3D3429;
     text-align: justify;
+}
+
+.story-text h4,
+.story-text h5 {
+    color: #4A3F32;
 }
 
 /* Mobile adjustments for ebook reader */
