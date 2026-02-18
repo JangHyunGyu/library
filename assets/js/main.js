@@ -683,7 +683,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (volumeRow) volumeRow.classList.toggle('disabled', !sfxEnabled);
 
     // Paper skin: restore from localStorage
-    const savedSkin = localStorage.getItem('lib_paper_skin') || 'aged';
+    const savedSkin = localStorage.getItem('lib_paper_skin') || 'cream';
     applyPaperSkin(savedSkin);
 });
 

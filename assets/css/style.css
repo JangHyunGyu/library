@@ -101,8 +101,6 @@
 /* Parchment skin: leather-like edges & texture */
 [data-paper-skin="parchment"] .modal-content {
     border: none;
-    /* Irregular organic shape — asymmetric rounded corners like real animal hide */
-    border-radius: 40% 30% 45% 25% / 8% 12% 10% 15%;
     box-shadow:
         0 10px 30px rgba(60, 40, 15, 0.25),
         inset 0 0 60px rgba(120, 80, 30, 0.12),
