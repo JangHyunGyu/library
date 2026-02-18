@@ -649,6 +649,77 @@ const stories = {
     }
 };
 
+// Sound Effects
+const sfx = {
+    pageTurn: new Audio('assets/audio/sfx/turning_book_page.mp3'),
+    bookClose: new Audio('assets/audio/sfx/book_closing.mp3')
+};
+sfx.pageTurn.preload = 'auto';
+sfx.bookClose.preload = 'auto';
+
+// Settings: load from localStorage
+let sfxEnabled = localStorage.getItem('lib_sfx_enabled') !== 'false'; // default true
+let sfxVolume = parseInt(localStorage.getItem('lib_sfx_volume') ?? '70', 10);
+
+function applySfxVolume() {
+    const vol = sfxEnabled ? sfxVolume / 100 : 0;
+    sfx.pageTurn.volume = vol;
+    sfx.bookClose.volume = vol;
+}
+applySfxVolume();
+
+// Initialize settings UI once DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('sfx-toggle');
+    const slider = document.getElementById('sfx-volume');
+    const label = document.getElementById('sfx-volume-label');
+    const volumeRow = document.getElementById('sfx-volume-row');
+    if (toggle) toggle.checked = sfxEnabled;
+    if (slider) {
+        slider.value = sfxVolume;
+        slider.style.setProperty('--volume-pct', sfxVolume + '%');
+    }
+    if (label) label.textContent = sfxVolume + '%';
+    if (volumeRow) volumeRow.classList.toggle('disabled', !sfxEnabled);
+});
+
+function toggleSettings() {
+    const modal = document.getElementById('settings-modal');
+    modal.hidden = !modal.hidden;
+}
+
+// Close settings when clicking outside the panel
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('settings-modal');
+    if (!modal.hidden && e.target === modal) {
+        modal.hidden = true;
+    }
+});
+
+function onSfxToggle(checked) {
+    sfxEnabled = checked;
+    localStorage.setItem('lib_sfx_enabled', checked);
+    applySfxVolume();
+    const volumeRow = document.getElementById('sfx-volume-row');
+    if (volumeRow) volumeRow.classList.toggle('disabled', !checked);
+}
+
+function onSfxVolume(value) {
+    sfxVolume = parseInt(value, 10);
+    localStorage.setItem('lib_sfx_volume', sfxVolume);
+    const label = document.getElementById('sfx-volume-label');
+    const slider = document.getElementById('sfx-volume');
+    if (label) label.textContent = sfxVolume + '%';
+    if (slider) slider.style.setProperty('--volume-pct', sfxVolume + '%');
+    applySfxVolume();
+}
+
+function playSound(sound) {
+    if (!sfxEnabled) return;
+    sound.currentTime = 0;
+    sound.play().catch(() => {});
+}
+
 function openBook(storyId) {
     const modal = document.getElementById('book-modal');
     const title = document.getElementById('modal-title');
@@ -661,6 +732,8 @@ function openBook(storyId) {
         body.innerHTML = story.content;
         modal.hidden = false;
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        
+        playSound(sfx.pageTurn);
         
         // Reset scroll position
         container.scrollLeft = 0;
@@ -678,6 +751,7 @@ function openBook(storyId) {
 
 function closeBook() {
     const modal = document.getElementById('book-modal');
+    playSound(sfx.bookClose);
     modal.hidden = true;
     document.body.style.overflow = '';
 }
@@ -722,6 +796,7 @@ function changePage(direction) {
     if (direction === -1 && currentScroll <= 10) return; // Start of book
 
     isFlipping = true;
+    playSound(sfx.pageTurn);
     
     // Create a clone of the current view
     const clone = document.createElement('div');
