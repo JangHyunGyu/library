@@ -273,8 +273,6 @@ body {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    perspective: 1500px;
-    /* 3D effect for page flip */
 }
 
 .modal:not([hidden]) {
@@ -295,8 +293,11 @@ body {
     border: 1px solid var(--paper-edge);
     display: flex;
     flex-direction: column;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+    /* perspective here so flip-page children render in 3D,
+       but NO preserve-3d — story-container stays in flat 2D context,
+       preventing iOS Safari column rendering bug */
+    -webkit-perspective: 1500px;
+    perspective: 1500px;
 }
 
 /* Aged paper texture overlay using layered gradients */
@@ -442,11 +443,12 @@ body {
     column-gap: 4rem;
     column-fill: auto;
     flex: 1;
-    /* Force GPU compositing on iOS without backface-visibility: hidden which causes content disappearing bug */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
     /* Aged paper background */
     background-color: var(--paper-base);
+    /* Explicitly flat — do NOT use translateZ(0) or preserve-3d here.
+       iOS Safari drops CSS column content when columns + 3D transforms combine. */
+    -webkit-transform-style: flat;
+    transform-style: flat;
 }
 
 /* Page Flip Animations */
