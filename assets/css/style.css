@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-paper-skin="aged"] {
     --bg-color: #F9F7F2;
     /* Warm off-white */
     --shelf-color: #EFEBE0;
@@ -14,11 +15,164 @@
     --book-yellow: #F9EBC8;
     --book-beige: #E8E0D5;
 
-    /* Aged Paper Colors */
+    /* Paper Colors (overridden by skins) */
     --paper-base: #F5ECD7;
     --paper-edge: #E8DCC8;
     --paper-stain: rgba(180, 155, 120, 0.06);
     --paper-dark-spot: rgba(160, 130, 90, 0.04);
+    --paper-text: #3D3429;
+    --paper-text-sub: #4A3F32;
+    --paper-spine-shadow: rgba(120, 100, 70, 0.08);
+    --paper-indicator: #9E8E78;
+    --paper-close-bg: rgba(245, 236, 215, 0.85);
+    --paper-border-right: rgba(160, 140, 110, 0.15);
+}
+
+/* Skin: Clean White */
+[data-paper-skin="white"] {
+    --paper-base: #FFFFFF;
+    --paper-edge: #F0F0F0;
+    --paper-stain: rgba(0, 0, 0, 0.01);
+    --paper-dark-spot: rgba(0, 0, 0, 0.01);
+    --paper-text: #2C2C2C;
+    --paper-text-sub: #3A3A3A;
+    --paper-spine-shadow: rgba(0, 0, 0, 0.04);
+    --paper-indicator: #999;
+    --paper-close-bg: rgba(255, 255, 255, 0.9);
+    --paper-border-right: rgba(0, 0, 0, 0.06);
+}
+
+/* Skin: Warm Cream */
+[data-paper-skin="cream"] {
+    --paper-base: #FDF8EE;
+    --paper-edge: #F0E8D8;
+    --paper-stain: rgba(200, 170, 120, 0.04);
+    --paper-dark-spot: rgba(180, 150, 100, 0.03);
+    --paper-text: #3E3428;
+    --paper-text-sub: #504333;
+    --paper-spine-shadow: rgba(140, 110, 70, 0.06);
+    --paper-indicator: #A89878;
+    --paper-close-bg: rgba(253, 248, 238, 0.9);
+    --paper-border-right: rgba(180, 160, 120, 0.1);
+}
+
+/* Skin: Dark Parchment */
+[data-paper-skin="dark"] {
+    --paper-base: #2A2520;
+    --paper-edge: #1E1A16;
+    --paper-stain: rgba(255, 230, 180, 0.03);
+    --paper-dark-spot: rgba(255, 220, 160, 0.02);
+    --paper-text: #D4C8B0;
+    --paper-text-sub: #C0B49C;
+    --paper-spine-shadow: rgba(0, 0, 0, 0.2);
+    --paper-indicator: #8A7E6A;
+    --paper-close-bg: rgba(42, 37, 32, 0.9);
+    --paper-border-right: rgba(255, 255, 255, 0.05);
+}
+
+/* Skin: Sepia */
+[data-paper-skin="sepia"] {
+    --paper-base: #F0E0C0;
+    --paper-edge: #D8C8A8;
+    --paper-stain: rgba(160, 120, 60, 0.08);
+    --paper-dark-spot: rgba(140, 100, 40, 0.06);
+    --paper-text: #42362A;
+    --paper-text-sub: #5A4A38;
+    --paper-spine-shadow: rgba(100, 80, 50, 0.1);
+    --paper-indicator: #8A7A60;
+    --paper-close-bg: rgba(240, 224, 192, 0.9);
+    --paper-border-right: rgba(140, 120, 80, 0.15);
+}
+
+/* Skin: Blue Night */
+[data-paper-skin="night"] {
+    --paper-base: #1A2332;
+    --paper-edge: #141B28;
+    --paper-stain: rgba(100, 150, 220, 0.03);
+    --paper-dark-spot: rgba(80, 130, 200, 0.02);
+    --paper-text: #B8C8DC;
+    --paper-text-sub: #A0B0C8;
+    --paper-spine-shadow: rgba(0, 0, 0, 0.25);
+    --paper-indicator: #6A7A90;
+    --paper-close-bg: rgba(26, 35, 50, 0.9);
+    --paper-border-right: rgba(255, 255, 255, 0.04);
+}
+
+/* Skin: Parchment (양피지) */
+[data-paper-skin="parchment"] {
+    --paper-base: #E8D5B7;
+    --paper-edge: #D4BE9A;
+    --paper-stain: rgba(140, 100, 50, 0.1);
+    --paper-dark-spot: rgba(120, 80, 30, 0.08);
+    --paper-text: #3A2E1E;
+    --paper-text-sub: #4E3F2C;
+    --paper-spine-shadow: rgba(90, 70, 40, 0.15);
+    --paper-indicator: #7A6A50;
+    --paper-close-bg: rgba(232, 213, 183, 0.9);
+    --paper-border-right: rgba(120, 90, 50, 0.18);
+}
+
+/* Parchment skin: leather-like edges & texture */
+[data-paper-skin="parchment"] .modal-content {
+    border: none;
+    border-radius: 3px;
+    box-shadow:
+        0 10px 30px rgba(60, 40, 15, 0.25),
+        inset 0 0 60px rgba(120, 80, 30, 0.12),
+        inset 0 0 120px rgba(100, 70, 20, 0.06);
+    /* Irregular torn-edge effect via clip-path */
+    /* Outer glow simulating worn leather border */
+    outline: 3px solid rgba(160, 120, 60, 0.25);
+    outline-offset: -1px;
+}
+
+/* Parchment: override texture overlay with leather grain */
+[data-paper-skin="parchment"] .modal-content::before {
+    background:
+        /* Leather grain noise pattern */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+        /* Deep corner aging */
+        radial-gradient(ellipse at 0% 0%, rgba(100, 70, 25, 0.15) 0%, transparent 40%),
+        radial-gradient(ellipse at 100% 0%, rgba(100, 70, 25, 0.12) 0%, transparent 35%),
+        radial-gradient(ellipse at 0% 100%, rgba(100, 70, 25, 0.12) 0%, transparent 35%),
+        radial-gradient(ellipse at 100% 100%, rgba(100, 70, 25, 0.15) 0%, transparent 40%),
+        /* Heavy edge darkening */
+        linear-gradient(to right, rgba(90, 60, 20, 0.12) 0%, transparent 8%, transparent 92%, rgba(90, 60, 20, 0.12) 100%),
+        linear-gradient(to bottom, rgba(90, 60, 20, 0.10) 0%, transparent 6%, transparent 94%, rgba(90, 60, 20, 0.10) 100%),
+        /* Center warmth */
+        radial-gradient(ellipse at center, transparent 40%, rgba(140, 100, 40, 0.08) 100%);
+}
+
+/* Parchment: thicker spine shadow with leather look */
+[data-paper-skin="parchment"] .modal-content::after {
+    width: 28px;
+    background: linear-gradient(to right,
+        rgba(70, 45, 15, 0.2) 0%,
+        rgba(90, 60, 20, 0.08) 50%,
+        transparent 100%);
+}
+
+/* Parchment: burnt/worn edge border using box-shadow on story container */
+[data-paper-skin="parchment"] .story-container {
+    box-shadow:
+        inset 4px 0 12px rgba(90, 60, 20, 0.08),
+        inset -4px 0 12px rgba(90, 60, 20, 0.08),
+        inset 0 4px 12px rgba(90, 60, 20, 0.06),
+        inset 0 -4px 12px rgba(90, 60, 20, 0.06);
+}
+
+/* Parchment: flip pages look like hide */
+[data-paper-skin="parchment"] .flip-page {
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"),
+        linear-gradient(to right, #E8D5B7 90%, #D4BE9A 100%) !important;
+}
+
+[data-paper-skin="parchment"] .page-clone {
+    background-color: #E8D5B7;
+    box-shadow:
+        inset 4px 0 12px rgba(90, 60, 20, 0.08),
+        inset -4px 0 12px rgba(90, 60, 20, 0.08);
 }
 
 * {
@@ -240,6 +394,57 @@ body {
     min-width: 2.5rem;
     text-align: right;
     color: var(--accent-color);
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* Settings Divider */
+.settings-divider {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    margin: 0.75rem 0;
+}
+
+/* Skin Picker */
+.skin-picker {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+}
+
+.skin-swatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.3rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.skin-swatch:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.skin-swatch.active {
+    border-color: var(--accent-color);
+    background-color: rgba(142, 128, 112, 0.08);
+}
+
+.swatch-color {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+.swatch-name {
+    font-size: 0.7rem;
+    color: var(--text-color);
     font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -546,8 +751,7 @@ body {
     pointer-events: none;
     z-index: 2;
     background: linear-gradient(to right,
-        rgba(120, 100, 70, 0.08) 0%,
-        rgba(120, 100, 70, 0.03) 40%,
+        var(--paper-spine-shadow) 0%,
         transparent 100%);
 }
 
@@ -562,7 +766,7 @@ body {
     transform-origin: left center;
     z-index: 20;
     pointer-events: none;
-    border-right: 1px solid rgba(160, 140, 110, 0.15);
+    border-right: 1px solid var(--paper-border-right);
     backface-visibility: hidden;
     opacity: 0;
     background:
@@ -623,7 +827,7 @@ body {
     top: 1rem;
     right: 0.5rem;
     font-size: 2rem;
-    background: rgba(245, 236, 215, 0.85);
+    background: var(--paper-close-bg);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -632,7 +836,7 @@ body {
     justify-content: center;
     border: none;
     cursor: pointer;
-    color: var(--text-color);
+    color: var(--paper-text);
     z-index: 10;
     backdrop-filter: blur(4px);
 }
@@ -735,7 +939,7 @@ body {
     background: none;
     border: none;
     font-size: 1.5rem;
-    color: var(--text-color);
+    color: var(--paper-text);
     cursor: pointer;
     padding: 0.5rem 1rem;
     opacity: 0.7;
@@ -754,14 +958,14 @@ body {
 #page-indicator {
     font-family: 'Gowun Batang', serif;
     font-size: 0.9rem;
-    color: #9E8E78;
+    color: var(--paper-indicator);
 }
 
 #modal-title {
     font-size: 2rem;
     margin-bottom: 2rem;
     text-align: center;
-    color: #3D3429;
+    color: var(--paper-text);
     /* Ensure title stays on first page */
     break-after: avoid;
 }
@@ -773,13 +977,13 @@ body {
 .story-text p {
     margin-bottom: 1.5rem;
     font-size: 1.05rem;
-    color: #3D3429;
+    color: var(--paper-text);
     text-align: justify;
 }
 
 .story-text h4,
 .story-text h5 {
-    color: #4A3F32;
+    color: var(--paper-text-sub);
 }
 
 /* Mobile adjustments for ebook reader */

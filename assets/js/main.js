@@ -681,6 +681,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (label) label.textContent = sfxVolume + '%';
     if (volumeRow) volumeRow.classList.toggle('disabled', !sfxEnabled);
+
+    // Paper skin: restore from localStorage
+    const savedSkin = localStorage.getItem('lib_paper_skin') || 'aged';
+    applyPaperSkin(savedSkin);
 });
 
 function toggleSettings() {
@@ -718,6 +722,20 @@ function playSound(sound) {
     if (!sfxEnabled) return;
     sound.currentTime = 0;
     sound.play().catch(() => {});
+}
+
+// Paper Skin
+function applyPaperSkin(skinId) {
+    document.documentElement.setAttribute('data-paper-skin', skinId);
+    // Update picker UI
+    document.querySelectorAll('.skin-swatch').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.skin === skinId);
+    });
+}
+
+function setPaperSkin(skinId) {
+    localStorage.setItem('lib_paper_skin', skinId);
+    applyPaperSkin(skinId);
 }
 
 function openBook(storyId) {
