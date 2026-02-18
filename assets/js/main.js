@@ -649,24 +649,51 @@ const stories = {
     }
 };
 
-// Sound Effects
-const sfx = {
-    pageTurn: new Audio('assets/audio/sfx/turning_book_page.mp3'),
-    bookClose: new Audio('assets/audio/sfx/book_closing.mp3')
-};
-sfx.pageTurn.preload = 'auto';
-sfx.bookClose.preload = 'auto';
+// Sound Effects — Web Audio API for low-latency playback (iOS Safari)
+const sfx = { pageTurn: null, bookClose: null };
+let audioCtx = null;
+let sfxGain = null;
+
+function initAudioContext() {
+    if (audioCtx) return;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    sfxGain = audioCtx.createGain();
+    sfxGain.connect(audioCtx.destination);
+    // Pre-load audio buffers
+    const files = {
+        pageTurn: 'assets/audio/sfx/turning_book_page.mp3',
+        bookClose: 'assets/audio/sfx/book_closing.mp3'
+    };
+    Object.entries(files).forEach(([key, url]) => {
+        fetch(url)
+            .then(r => r.arrayBuffer())
+            .then(buf => audioCtx.decodeAudioData(buf))
+            .then(decoded => { sfx[key] = decoded; })
+            .catch(() => {});
+    });
+    applySfxVolume();
+}
+
+// Unlock AudioContext on first user interaction (required by iOS Safari)
+function unlockAudio() {
+    initAudioContext();
+    if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+    document.removeEventListener('touchstart', unlockAudio);
+    document.removeEventListener('click', unlockAudio);
+}
+document.addEventListener('touchstart', unlockAudio, { once: true });
+document.addEventListener('click', unlockAudio, { once: true });
 
 // Settings: load from localStorage
 let sfxEnabled = localStorage.getItem('lib_sfx_enabled') !== 'false'; // default true
 let sfxVolume = parseInt(localStorage.getItem('lib_sfx_volume') ?? '70', 10);
 
 function applySfxVolume() {
-    const vol = sfxEnabled ? sfxVolume / 100 : 0;
-    sfx.pageTurn.volume = vol;
-    sfx.bookClose.volume = vol;
+    if (!sfxGain) return;
+    sfxGain.gain.value = sfxEnabled ? sfxVolume / 100 : 0;
 }
-applySfxVolume();
 
 // Initialize settings UI once DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
@@ -718,10 +745,13 @@ function onSfxVolume(value) {
     applySfxVolume();
 }
 
-function playSound(sound) {
-    if (!sfxEnabled) return;
-    sound.currentTime = 0;
-    sound.play().catch(() => {});
+function playSound(buffer) {
+    if (!sfxEnabled || !buffer || !audioCtx) return;
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const src = audioCtx.createBufferSource();
+    src.buffer = buffer;
+    src.connect(sfxGain);
+    src.start(0);
 }
 
 // Paper Skin
