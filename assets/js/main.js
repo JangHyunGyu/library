@@ -665,11 +665,23 @@ function openBook(storyId) {
         // Reset scroll position
         container.scrollLeft = 0;
         
+        // iOS Safari: force repaint to ensure column layout renders correctly
+        // Without this, content may flash then disappear on first open
+        container.style.display = 'none';
+        void container.offsetHeight; // trigger reflow
+        container.style.display = '';
+        
         // Update layout for columns
         updateColumnLayout();
         
-        // Wait for layout to stabilize then update indicator
-        setTimeout(updatePageIndicator, 100);
+        // Wait for layout & flip animation to stabilize, then update.
+        // Longer delay for iOS which needs more time for compositing after animations.
+        setTimeout(() => {
+            updateColumnLayout();
+            updatePageIndicator();
+            // iOS Safari: force another repaint after flip animations complete
+            container.style.webkitTransform = 'translateZ(0)';
+        }, 500);
     }
 }
 
