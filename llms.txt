@@ -1,0 +1,23 @@
+# Myoseon's Stories
+> Korean short story and emotional essay archive by Myoseon.
+
+## About
+Myoseon's Stories is an online reading space for short stories, essays, and reflective writing. The site focuses on warm, emotional, healing text pieces presented in a quiet reading interface.
+
+## Features
+- Korean short stories and essays
+- Emotional and healing writing
+- Browser-based reading experience
+- Theme and reading mood controls
+- Connected to Myoseon's art and photo sites
+
+## Links
+- Stories: https://book.myoseon.kr/
+- Main Myoseon site: https://myoseon.kr/
+- Sitemap: https://book.myoseon.kr/sitemap.xml
+
+## Language
+- Korean (한국어)
+
+## Category
+Short Stories, Essays, Korean Writing, Healing Text, Online Reading
