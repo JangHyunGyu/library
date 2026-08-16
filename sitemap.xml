@@ -12,4 +12,18 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+<!-- traffic-pages:start -->
+  <url>
+    <loc>https://book.myoseon.kr/seo/short-story-online.html</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://book.myoseon.kr/seo/essay-before-sleep.html</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+<!-- traffic-pages:end -->
 </urlset>
