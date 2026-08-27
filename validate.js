@@ -101,6 +101,20 @@ check(
   'Missing JSON-LD structured data'
 );
 
+const robotsMetaCount = (indexHtml.match(/<meta\s+name=["']robots["']/gi) || []).length;
+check(
+  robotsMetaCount === 1,
+  'Has exactly one robots meta tag',
+  `Expected one robots meta tag, found ${robotsMetaCount}`
+);
+
+const canonicalMatches = [...indexHtml.matchAll(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/gi)];
+check(
+  canonicalMatches.length === 1 && canonicalMatches[0][1] === 'https://book.myoseon.kr/',
+  'Has one canonical URL for the root page',
+  'Canonical URL is missing, duplicated, or not the root page'
+);
+
 // ──────────────────────────────────────────────
 //  4. HTML local asset references
 // ──────────────────────────────────────────────
@@ -184,6 +198,12 @@ check(
   sitemapUrls.some(u => u.includes(cname)),
   `sitemap URLs match CNAME domain (${cname})`,
   `sitemap URLs do not reference CNAME domain (${cname})`
+);
+check(
+  sitemapUrls.filter(u => u === 'https://book.myoseon.kr/').length === 1 &&
+    !sitemapUrls.includes('https://book.myoseon.kr/index.html'),
+  'sitemap lists the canonical home URL once',
+  'sitemap contains a duplicate non-canonical home URL'
 );
 
 // ──────────────────────────────────────────────
