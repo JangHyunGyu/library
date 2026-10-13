@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-13",
+  "scope": "Search and social preview metadata only; existing visible page bodies, styles and executable scripts preserved.",
+  "representativeImage": "https://book.myoseon.kr/assets/images/social/library-representative.png",
+  "dimensions": [
+    1254,
+    1254
+  ],
+  "indexablePagesUpdated": 4,
+  "source": "exec-7f2c037e-f000-461b-95eb-41606227b2db.png",
+  "originalAssetsPreserved": true,
+  "visualVerification": {
+    "viewports": [
+      "1440x900",
+      "390x844"
+    ],
+    "result": "No visible UI change; zero pixel difference in final comparisons.",
+    "method": "Before/after browser screenshots with animations frozen."
+  },
+  "publishing": "main branch; GitHub Pages/Cloudflare Pages Git integration, or existing news Worker",
+  "generation": {
+    "tool": "Built-in image_gen",
+    "qualityRequest": "Maximum supported quality and highest native resolution, square 1:1",
+    "actualDimensions": [
+      1254,
+      1254
+    ],
+    "qualityOrSizeControlsExposed": false,
+    "masterPreservedWithoutResizing": true,
+    "prompt": "Create a premium editorial photographic still life for Myoseon, a quiet Korean creative space for essays, short stories, photography and paintings. Square 1:1 composition. Maximum supported quality and highest native resolution. Warm afternoon sun across a natural oak writing desk beside a softly blurred window; an open cream-paper literary notebook without any readable text, a dark fountain pen, two clothbound books without lettering, a small elegant analog camera, and a small framed watercolor of a winter tree. Cream, sage green, warm wood palette. A restrained, beautifully composed real photograph, subtle film grain, calm and intimate, clear central focal arrangement that remains readable as a tiny search thumbnail. No people, no logo, no lettering, no watermarks, no UI. This is a representative image for the complete creative arts and writing service, not a book cover mockup. Preserve meticulous materials and natural light at maximum native resolution."
+  }
+}
