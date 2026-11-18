@@ -1,3 +1,4 @@
+var __oc0;
 const stories = {
     story1: {
         title: "오후 2시의 고양이",
@@ -688,7 +689,7 @@ document.addEventListener('click', unlockAudio, { once: true });
 
 // Settings: load from localStorage
 let sfxEnabled = localStorage.getItem('lib_sfx_enabled') !== 'false'; // default true
-let sfxVolume = parseInt(localStorage.getItem('lib_sfx_volume') ?? '70', 10);
+let sfxVolume = parseInt((((__oc0 = localStorage.getItem('lib_sfx_volume')) !== null && __oc0 !== void 0 ? __oc0 : '70')), 10);
 
 function applySfxVolume() {
     if (!sfxGain) return;
