@@ -205,6 +205,25 @@ check(
   'sitemap lists the canonical home URL once',
   'sitemap contains a duplicate non-canonical home URL'
 );
+check(
+  sitemapUrls.every(u => !/\.html$/i.test(u)),
+  'sitemap contains zero .html URLs',
+  'sitemap still contains .html URL(s)'
+);
+for (const loc of sitemapUrls) {
+  const pathname = new URL(loc).pathname;
+  const htmlRel = pathname === '/' ? 'index.html' : `${pathname.replace(/^\//, '')}.html`;
+  if (!fileExists(htmlRel)) {
+    check(false, '', `sitemap target missing: ${htmlRel}`);
+    continue;
+  }
+  const pageHtml = readFile(htmlRel);
+  const canonical = (pageHtml.match(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["']/i) || [])[1];
+  const ogUrl = (pageHtml.match(/<meta\b[^>]*property=["']og:url["'][^>]*content=["']([^"']+)["']/i) || [])[1];
+  check(canonical === loc, `${htmlRel}: canonical matches sitemap`, `${htmlRel}: canonical "${canonical}" !== "${loc}"`);
+  check(ogUrl === loc, `${htmlRel}: og:url matches sitemap`, `${htmlRel}: og:url "${ogUrl}" !== "${loc}"`);
+  check(!/href=["']\/?seo\/[^"']+\.html/i.test(pageHtml), `${htmlRel}: zero internal .html SEO links`, `${htmlRel}: contains internal .html SEO link`);
+}
 
 // ──────────────────────────────────────────────
 //  8. Audio assets

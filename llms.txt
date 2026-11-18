@@ -17,9 +17,9 @@ Myoseon's Stories is an online reading space for short stories, essays, and refl
 - Sitemap: https://book.myoseon.kr/sitemap.xml
 
 ## Reading Guides
-- [Short Stories Online](https://book.myoseon.kr/seo/short-story-online.html): Choosing and reading a short fictional work in one sitting
-- [Essays Before Sleep](https://book.myoseon.kr/seo/essay-before-sleep.html): A quiet reading routine for short reflective essays
-- [Short Story vs. Essay](https://book.myoseon.kr/seo/short-story-vs-essay.html): How fictional scenes and first-person reflection create different reading experiences
+- [Short Stories Online](https://book.myoseon.kr/seo/short-story-online): Choosing and reading a short fictional work in one sitting
+- [Essays Before Sleep](https://book.myoseon.kr/seo/essay-before-sleep): A quiet reading routine for short reflective essays
+- [Short Story vs. Essay](https://book.myoseon.kr/seo/short-story-vs-essay): How fictional scenes and first-person reflection create different reading experiences
 
 ## Language
 - Korean (한국어)
